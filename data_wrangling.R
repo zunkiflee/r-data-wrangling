@@ -89,3 +89,24 @@ sum(is.na(data))
 #delete missing value
 data <- na.omit(data)
 
+data %>%
+  count(region)
+
+#mini project 
+df <- data %>%
+  select(order_date, segment, city, 
+         region, category,
+         sub_category,
+         sales) %>%
+  filter(region == 'South' | region == 'Central') %>%
+  arrange(desc(sales))
+
+
+df_2 <- data %>%
+  group_by(category) %>%
+  summarise(mean_sales = mean(sales),
+            sum_sales = sum(sales),
+            sd_sales = sd(sales),
+            min_sales = min(sales),
+            max_sales = max(sales),
+            total = n())
